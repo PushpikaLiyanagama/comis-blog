@@ -22,3 +22,5 @@ Comics Blog is a web application built with Laravel that allows users to create,
 - JavaScript: For interactive features on the client side.
 - Git: Version control for tracking changes and collaboration.
   
+---
+- You need create Gougle authentication credentials for this app and add that data into Config -> service.php
