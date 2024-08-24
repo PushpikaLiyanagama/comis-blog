@@ -153,36 +153,34 @@
     </section>
 
     <section class="container blog-posts">
-
         <div class="row">
             <div class="col-md-12">
-
-            @foreach($posts as $post)
-                <div class="card post">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="{{ asset($post->image_path) }}" alt="{{ $post->title }}" class="card-img">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h2>{{ $post->title }}</h2>
-                                <p class="card-text">{{ $post->mini_description }}</p>
-                                <a href="{{ route('post.show', $post->id) }}">
-                                    <button type="button" class="btn btn-outline-warning">See more...</button>
-                                </a>                                  
+                @foreach($posts as $post)
+                    <div class="card post">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="{{ asset($post->image_path) }}" alt="{{ $post->title }}" class="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h2>{{ $post->title }}</h2>
+                                    <p class="card-text">{{ $post->mini_description }}</p>
+                                    <a href="{{ route('post.show', $post->id) }}">
+                                        <button type="button" class="btn btn-outline-warning">See more...</button>
+                                    </a>                                  
+                                </div>
                             </div>
                         </div>
                     </div>
+                @endforeach
+
+                
+                <div class="d-flex justify-content-center">
+                    {{ $posts->links('components.pagination') }}
                 </div>
-            @endforeach
-
-
             </div>
         </div>
-
     </section>
-
-
 
     <section id="about-section" class="about-section">
         <h2>About Us Section</h2>
@@ -193,7 +191,6 @@
     <footer>
         <p>© All Rights Reserved. Developed by Pushpika</p>
     </footer>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

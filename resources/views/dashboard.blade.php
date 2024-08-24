@@ -164,6 +164,10 @@
                 </div>
             @endforeach
 
+            <div class="d-flex justify-content-center">
+                {{ $posts->links('components.pagination') }}
+            </div>
+
             </div>
         </div>
     </section>
