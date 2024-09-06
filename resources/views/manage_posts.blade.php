@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create a Post</title>
+    <title>Manage Posts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .logo {
             text-align: center;
@@ -22,6 +24,7 @@
             top: 0;
             z-index: 1000;
             background-color: #f8f9fa;
+            width: 100%;
         }
         .navbar-nav {
             margin: 0 auto;
@@ -31,26 +34,55 @@
             flex-grow: 1;
             text-align: center;
         }
-        .form-container {
-            margin: 40px auto;
-            padding: 60px;
-            width: 60%;
-            max-width: 600px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            background-color: #fff;
-        }
-        .form-group label {
-            font-weight: bold;
-        }
-        .form-control {
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        .upload-button {
+        .image-container {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .image-container .img-fluid {
+            height: auto;
+        }
+        .image01 {
+            width: 40%;
+            max-height: 400px;
+        }
+        .image02, .image03 {
+            width: 25%;
+            max-height: 200px;
+        }
+        .image01, .image02, .image03 {
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .image01 {
+                width: 100%;
+                max-height: none;
+            }
+            .image02, .image03 {
+                width: 48%;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .image01, .image02, .image03 {
+                width: 100%;
+                max-height: none;
+            }
+        }
+
+        .post {
+            margin: 20px 0;
+        }
+        .about-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
         }
         footer {
             text-align: center;
@@ -64,7 +96,7 @@
 
     <header class="logo">
         <img src="images/logo.png" alt="Logo Image" class="logo-image">
-        <h4>Comics Blog - Create a Post</h4>
+        <h4>Comics Blog - Manage Posts</h4>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -97,37 +129,39 @@
         </div>
     </nav>
 
-    <section class="form-container">
-        <form action="{{ route('submit.post') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="comicTitle">Comic Title:</label>
-                <input type="text" class="form-control" id="comicTitle" name="comicTitle" placeholder="Enter Comic Title" required>
-            </div>
-            <div class="form-group">
-                <label for="comicImage">Comic Image:</label>
-                <input type="file" class="form-control" id="comicImage" name="comicImage" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label for="comicmDescription">Comic Mini-description:</label>
-                <input type="text" class="form-control" id="comicmDescription" name="comicmDescription" placeholder="Enter Short description" required>
-            </div>
-            <div class="form-group">
-                <label for="comicDescription">Comic Description:</label>
-                <textarea class="form-control" id="comicDescription" name="comicDescription" rows="5" placeholder="Enter Comic Description" required></textarea>
-            </div>
-            <div class="upload-button">
-                <button type="submit" class="btn btn-primary">Upload</button>
-            </div>
-        </form>
+    <section class="container">
+        <h2>Manage Posts</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Mini Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($posts as $post)
+                <tr>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->mini_description }}</td>
+                    <td>
+                        <a href="{{ route('edit_post', $post->id) }}" class="btn btn-info">Edit</a>
+                        <form action="{{ route('delete_post', $post->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </section>
-
 
     <footer>
         <p>© All Rights Reserved. Developed by Pushpika</p>
     </footer>
 
-    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

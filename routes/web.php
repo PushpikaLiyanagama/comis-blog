@@ -33,3 +33,10 @@ Route::post('/submit-post', [PostController::class, 'store'])->name('submit.post
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('posts/{id}', [PostController::class, 'show'])->name('post.show');
+
+Route::get('/manage-posts', [PostController::class, 'manage'])->name('manage_posts');
+Route::get('/edit-post/{id}', [PostController::class, 'edit'])->name('edit_post');
+Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::put('/posts/{id}', [PostController::class, 'update'])->name('post.update');
+
+Route::delete('/delete-post/{id}', [PostController::class, 'destroy'])->name('delete_post');

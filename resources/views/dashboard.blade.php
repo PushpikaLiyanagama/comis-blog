@@ -119,6 +119,9 @@
                             <a class="nav-link" href="{{ route('create_post') }}">Create a Post</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('manage_posts') }}">Manage Posts</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Log Out
